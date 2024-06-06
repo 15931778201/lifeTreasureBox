@@ -66,6 +66,13 @@
           }
         },
         {
+          "path": "home/qiming",
+          "style": {
+            "navigationBarTitleText": "宝宝起名",
+            "navigationStyle": "custom"
+          }
+        },
+        {
           "path": "home/fixedTeacher",
           "style": {
             "navigationBarTitleText": "VIP上课"
@@ -143,7 +150,14 @@
           "style": {
             "navigationBarTitleText": "邀请记录"
           }
-        }
+        },
+        {
+          "path": "detail/result",
+          "style": {
+            "navigationBarTitleText": "结果",
+            "navigationStyle": "custom"
+          }
+        }    
       ]
     },
     {

@@ -37,7 +37,7 @@
           class="img-wrap"
           v-for="(application, applicationIndex) in item.applications"
           :key="applicationIndex"
-          @click="navigateTo('selfTextbook')"
+          @click="navigateTo('qiming')"
         >
           <img :src="application.coverImage" class="item-img" alt="" />
           <text class="text">{{ application.applicationName }}</text>
@@ -190,7 +190,7 @@
         });
       },
       getHeight() {
-        let res = wx.getMenuButtonBoundingClientRect();
+        let res = uni.getMenuButtonBoundingClientRect();
         this.titleHeight = res.top;
       },
       navigateTo(name) {
@@ -202,7 +202,7 @@
   };
 </script>
 
-<style scode lang="scss">
+<style scoped lang="scss">
   .container {
     margin: 0 31rpx;
     padding-bottom: 100rpx;
