@@ -1,7 +1,7 @@
 <template>
   <view class="container">
-    <view class="title" :style="'padding-top:' + titleHeight + 'px'">生活百宝箱</view>
-    <view class="swiper-wrap" :style="{ paddingTop: titleHeight + 'px', marginTop: '104rpx' }">
+    <view class="title">生活百宝箱</view>
+    <view class="swiper-wrap" :style="{ marginTop: '104rpx' }">
       <swiper
         class="swiper"
         circular
@@ -212,8 +212,8 @@
       z-index: 99;
       width: 100%;
       background: #ffffff;
-      font-size: 48rpx;
-      font-weight: 500;
+      font-size: 36rpx;
+      font-weight: bold;
       color: #333333;
       line-height: 64rpx;
       margin-left: -31rpx;
@@ -245,9 +245,23 @@
       display: block;
       margin-bottom: 20rpx;
       font-size: 36rpx;
-      font-weight: 500;
+      font-weight: bold;
       color: #333333;
       line-height: 42rpx;
+      position: relative;
+      padding-left: 20rpx;
+      &::before {
+        content: '';
+        height: 36rpx;
+        width: 10rpx;
+        background: #f1aa2e;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin-right: 20rpx;
+        margin-bottom: 20rpx;
+      }
     }
 
     .content-wrap {
@@ -270,7 +284,8 @@
           margin-top: 20rpx;
           font-size: 24rpx;
           font-weight: 400;
-          line-height: 24rpx;
+          line-height: 48rpx;
+          height: 48rpx;
           position: absolute;
           bottom: 0;
           right: 0;

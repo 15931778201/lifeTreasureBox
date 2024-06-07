@@ -55,7 +55,7 @@ export const applicationData = [
   },
   {
     id: 'group-001',
-    group: '最热推荐', // 分组
+    group: '宠物起名社', // 分组
     applications: [
       {
         id: 'application-005',
@@ -85,7 +85,7 @@ export const applicationData = [
   },
   {
     id: 'group-001',
-    group: '最热推荐', // 分组
+    group: '星座运程', // 分组
     applications: [
       {
         id: 'application-007',
