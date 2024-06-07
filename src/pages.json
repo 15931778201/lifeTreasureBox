@@ -33,7 +33,7 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "usingComponents": {
-      "painter": "/wxcomponents/painter/painter"
+      // "painter": "/wxcomponents/painter/painter"
     }
   },
   "tabBar": {
