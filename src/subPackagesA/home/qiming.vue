@@ -6,23 +6,27 @@
     <div class="content">
       <div class="item">
         <label class="label" for="">姓氏</label>
-        <input class="input" placeholder="请输入宝宝姓氏" />
+        <input class="input" v-model="submitForm.surname" placeholder="请输入宝宝姓氏" />
       </div>
       <div class="item">
         <label class="label" for="">预产期</label>
-        <input class="input" placeholder="XXXX/XX/XX" />
+        <input class="input" placeholder="XXXX/XX/XX" v-model="submitForm.date" />
         <!-- <picker class="input" mode="date" placeholder="XXXX/XX/XX" /> -->
       </div>
       <div class="item">
         <label class="label" for="">性别</label>
-        <view class="radio-group">
-          <label class="radio"><radio value="r1" checked="true" />男</label>
-          <label class="radio"><radio value="r2" />女</label>
-        </view>
+        <uni-data-checkbox v-model="submitForm.sex" :localdata="getOptions(sex)"></uni-data-checkbox>
+
+        <!-- <uni-radio-group class="radio-group" v-model="submitForm.sex">
+         <uni-radio value="r1" checked="true" />男</label>
+          <label class="radio"><uni-radio value="r2" />女</label>          
+        </uni-radio-group> -->
       </div>
       <div class="item">
         <label class="label" for="">特质</label>
-        <checkbox-group class="checkbox-group">
+        <uni-data-checkbox v-model="submitForm.characteristic" multiple :localdata="getOptions(characteristic)"></uni-data-checkbox>
+
+        <!-- <checkbox-group class="checkbox-group" v-model="submitForm.characteristic">
           <label> <checkbox value="cb" checked="true" />勇敢 </label>
           <label> <checkbox value="cb" />帅气 </label>
           <label> <checkbox value="cb" />文雅 </label>
@@ -38,7 +42,7 @@
           <label> <checkbox value="cb" />健康 </label>
           <label> <checkbox value="cb" />情怀 </label>
           <label> <checkbox value="cb" />初恋 </label>
-        </checkbox-group>
+        </checkbox-group> -->
       </div>
       <div class="" v-for="(item, index) in detailForm.detailJson" :key="index">
         <div class="title">{{ item.label }}</div>
@@ -94,14 +98,23 @@
         },
         submitForm: {},
         options: {},
+        sex: ['男', '女'],
+        characteristic: ['勇敢', '洋气', '文雅', '帅气', '多金', '健康', '情怀', '美丽', '温柔', '勤劳', '好运', '聪明', '灵敏', '贴心', '随意']
       };
     },
     onShow() {},
     methods: {
+      getOptions(list) {
+        return list.map(item => {
+          return {value: item, text: item}
+        })
+      },
       toTextResult() {
-        uni.navigateTo({
-          url: '/subPackagesA/detail/result',
-        });
+        const content = `请帮我想一个宝宝的名字，姓${this.submitForm.surname}，预产期在${this.submitForm.date}，性别${this.submitForm.sex}，要求有以下特质：${this.submitForm.characteristic.join('、')}等。`
+        console.log(this.submitForm, content);
+        // uni.navigateTo({
+        //   url: '/subPackagesA/detail/result',
+        // });
       },
     },
   };
