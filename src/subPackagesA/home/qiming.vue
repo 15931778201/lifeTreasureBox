@@ -15,7 +15,10 @@
       </div>
       <div class="item">
         <label class="label" for="">性别</label>
-        <uni-data-checkbox v-model="submitForm.sex" :localdata="getOptions(sex)"></uni-data-checkbox>
+        <uni-data-checkbox
+          v-model="submitForm.sex"
+          :localdata="getOptions(sex)"
+        ></uni-data-checkbox>
 
         <!-- <uni-radio-group class="radio-group" v-model="submitForm.sex">
          <uni-radio value="r1" checked="true" />男</label>
@@ -24,7 +27,11 @@
       </div>
       <div class="item">
         <label class="label" for="">特质</label>
-        <uni-data-checkbox v-model="submitForm.characteristic" multiple :localdata="getOptions(characteristic)"></uni-data-checkbox>
+        <uni-data-checkbox
+          v-model="submitForm.characteristic"
+          multiple
+          :localdata="getOptions(characteristic)"
+        ></uni-data-checkbox>
 
         <!-- <checkbox-group class="checkbox-group" v-model="submitForm.characteristic">
           <label> <checkbox value="cb" checked="true" />勇敢 </label>
@@ -77,7 +84,9 @@
 </template>
 
 <script>
+  import sparkMixins from '@/mixins/spark-api.js';
   export default {
+    mixins: [sparkMixins],
     data() {
       return {
         detailForm: {
@@ -99,18 +108,40 @@
         submitForm: {},
         options: {},
         sex: ['男', '女'],
-        characteristic: ['勇敢', '洋气', '文雅', '帅气', '多金', '健康', '情怀', '美丽', '温柔', '勤劳', '好运', '聪明', '灵敏', '贴心', '随意']
+        characteristic: [
+          '勇敢',
+          '洋气',
+          '文雅',
+          '帅气',
+          '多金',
+          '健康',
+          '情怀',
+          '美丽',
+          '温柔',
+          '勤劳',
+          '好运',
+          '聪明',
+          '灵敏',
+          '贴心',
+          '随意',
+        ],
       };
     },
     onShow() {},
     methods: {
       getOptions(list) {
-        return list.map(item => {
-          return {value: item, text: item}
-        })
+        return list.map((item) => {
+          return { value: item, text: item };
+        });
       },
       toTextResult() {
-        const content = `请帮我想一个宝宝的名字，姓${this.submitForm.surname}，预产期在${this.submitForm.date}，性别${this.submitForm.sex}，要求有以下特质：${this.submitForm.characteristic.join('、')}等。`
+        const content = `请帮我想一个宝宝的名字，姓${this.submitForm.surname}，预产期在${
+          this.submitForm.date
+        }，性别${this.submitForm.sex}，要求有以下特质：${this.submitForm.characteristic.join(
+          '、'
+        )}等。`;
+        this.userInput = content;
+        this.start();
         console.log(this.submitForm, content);
         // uni.navigateTo({
         //   url: '/subPackagesA/detail/result',
