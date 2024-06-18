@@ -19,7 +19,11 @@
           ></image>
         </swiper-item>
         <swiper-item v-if="bannerList.length === 0">
-          <image mode="scaleToFill" src="@img/banner-app.png" class="swiper-item"></image>
+          <image
+            mode="scaleToFill"
+            src="https://gd-hbimg.huaban.com/a871c96284ac06b3fa9d0ba61af62a01a81589b52c810-fzejdj_fw658"
+            class="swiper-item"
+          ></image>
         </swiper-item>
       </swiper>
     </view>
