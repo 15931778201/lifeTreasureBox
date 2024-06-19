@@ -18,12 +18,12 @@ export default {
       return new Promise((resolve, reject) => {
         const apiKey = API_KEY;
         const apiSecret = API_SECRET;
-        const url = 'wss://spark-api.xf-yun.com/v2.1/chat';
+        const url = 'wss://spark-api.xf-yun.com/v3.5/chat';
         const host = window.location.host;
         const date = new Date().toGMTString();
         const algorithm = 'hmac-sha256';
         const headers = 'host date request-line';
-        const signatureOrigin = `host: ${host}\ndate: ${date}\nGET /v2.1/chat HTTP/1.1`;
+        const signatureOrigin = `host: ${host}\ndate: ${date}\nGET /v3.5/chat HTTP/1.1`;
         const signatureSha = CryptoJS.HmacSHA256(signatureOrigin, apiSecret);
         const signature = CryptoJS.enc.Base64.stringify(signatureSha);
         const authorizationOrigin = `api_key="${apiKey}", algorithm="${algorithm}", headers="${headers}", signature="${signature}"`;
@@ -74,7 +74,7 @@ export default {
         },
         parameter: {
           chat: {
-            domain: 'generalv2',
+            domain: 'generalv3.5',
             temperature: 0.5,
             max_tokens: 1024,
           },
