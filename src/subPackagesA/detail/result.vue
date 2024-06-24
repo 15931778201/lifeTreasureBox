@@ -16,7 +16,10 @@
 </template>
 
 <script>
+  import sparkMixins from '@/mixins/spark-api.js';
+
   export default {
+    mixins: [sparkMixins],
     data() {
       return {
         detailForm: {
@@ -48,6 +51,9 @@
         submitForm: {},
         options: {},
       };
+    },
+    onLoad(options) {
+      this.detailForm.resultData = JSON.parse(options.names);
     },
     onShow() {},
     methods: {

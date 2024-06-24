@@ -78,7 +78,7 @@
       </div>
     </div>
     <div class="footer">
-      <button class="button" @click="toTextResult">开始取名</button>
+      <button :loading="btnLoading" class="button" @click="toAnswer">开始取名</button>
     </div>
   </view>
 </template>
@@ -105,6 +105,7 @@
           group: '最热推荐', // 分组
           sortIndex: 3, // 分组权重
         },
+        btnLoading: false,
         submitForm: {},
         options: {},
         sex: ['男', '女'],
@@ -128,24 +129,38 @@
       };
     },
     onShow() {},
+    watch: {
+      closeFlag(val) {
+        val && this.toTextResult();
+      },
+    },
     methods: {
       getOptions(list) {
         return list.map((item) => {
           return { value: item, text: item };
         });
       },
-      toTextResult() {
-        const content = `请帮我想一个宝宝的名字，姓${this.submitForm.surname}，预产期在${
+      toAnswer() {
+        const content = `请帮我想至少8个宝宝的名字，姓${this.submitForm.surname}，预产期在${
           this.submitForm.date
         }，性别${this.submitForm.sex}，要求有以下特质：${this.submitForm.characteristic.join(
           '、'
-        )}等。`;
+        )}等，仅提供名字不需要解释，总结一下。`;
         this.userInput = content;
+        this.btnLoading = true;
         this.start();
         console.log(this.submitForm, content);
-        // uni.navigateTo({
-        //   url: '/subPackagesA/detail/result',
-        // });
+      },
+      toTextResult() {
+        console.log(this.totalResStr);
+        if (this.totalResStr) {
+          this.btnLoading = false;
+          uni.navigateTo({
+            url: `/subPackagesA/detail/result?names=${JSON.stringify(
+              this.totalResStr.split('\n').map((item) => item.split('. ')[1])
+            )}`,
+          });
+        }
       },
     },
   };

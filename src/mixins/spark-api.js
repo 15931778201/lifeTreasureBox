@@ -9,8 +9,10 @@ export default {
     return {
       status: 'init',
       ttsWS: null,
-      totalRes: '',
+      totalRes: [],
       userInput: '',
+      totalResStr: '',
+      closeFlag: false,
     };
   },
   methods: {
@@ -50,6 +52,7 @@ export default {
         }
         this.ttsWS = ttsWS;
         ttsWS.onopen = (e) => {
+          this.closeFlag = false;
           this.webSocketSend();
         };
         ttsWS.onmessage = (e) => {
@@ -62,6 +65,7 @@ export default {
           console.error(`详情查看：${encodeURI(url.replace('wss:', 'https:'))}`);
         };
         ttsWS.onclose = (e) => {
+          this.closeFlag = true;
           console.log(e);
         };
       });
@@ -94,13 +98,13 @@ export default {
       this.ttsWS.send(JSON.stringify(params));
     },
     start() {
-      this.totalRes = '';
+      this.totalRes = [];
       this.connectWebSocket();
     },
     result(resultData) {
       let jsonData = JSON.parse(resultData);
       console.log(resultData);
-      this.totalRes += resultData;
+      this.totalRes.push(jsonData);
 
       //   this.$refs.outputText.value = this.totalRes;
       if (jsonData.header.code !== 0) {
@@ -108,6 +112,11 @@ export default {
         console.error(`${jsonData.header.code}:${jsonData.header.message}`);
         return;
       }
+      this.totalResStr = this.totalRes
+        .map((item) => {
+          return item.payload?.choices?.text?.map((item1) => item1.content).join('');
+        })
+        .join('');
       if (jsonData.header.code === 0 && jsonData.header.status === 2) {
         this.ttsWS.close();
         this.setStatus('init');
