@@ -21,7 +21,7 @@
         <swiper-item v-if="bannerList.length === 0">
           <image
             mode="scaleToFill"
-            src="https://gd-hbimg.huaban.com/a871c96284ac06b3fa9d0ba61af62a01a81589b52c810-fzejdj_fw658"
+            src="https://img.cifnews.com/dev/20240708/9b5054e479dc42f9b93a24bd1b5ed598.png"
             class="swiper-item"
           ></image>
         </swiper-item>
