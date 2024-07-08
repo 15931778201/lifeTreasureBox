@@ -54,27 +54,12 @@
       <div class="" v-for="(item, index) in detailForm.detailJson" :key="index">
         <div class="title">{{ item.label }}</div>
         <input v-if="!item.value" class="text-left text-30rpx" v-model="submitForm[item.label]" />
-        <radio-group
-          v-if="item.options && !item.multiple"
-          class="text-left text-30rpx"
+        <uni-data-checkbox
+          v-if="item.options"
           v-model="submitForm[item.label]"
-        >
-          <radio v-for="(option, optionIndex) in item.options" :key="optionIndex" :value="option">{{
-            option
-          }}</radio>
-        </radio-group>
-        <checkbox-group
-          v-if="item.options && item.multiple"
-          class="text-left text-30rpx"
-          v-model="submitForm[item.label]"
-        >
-          <checkbox
-            v-for="(option, optionIndex) in item.options"
-            :key="optionIndex"
-            :value="option"
-            >{{ option }}</checkbox
-          >
-        </checkbox-group>
+          :multiple="item.multiple"
+          :localdata="getOptions(item.options)"
+        ></uni-data-checkbox>
       </div>
     </div>
     <div class="footer">
@@ -155,10 +140,14 @@
         console.log(this.totalResStr);
         if (this.totalResStr) {
           this.btnLoading = false;
+          const names = this.totalResStr
+            .split('\n')
+            .map((item) => item.split('. ')[1])
+            .filter((item) => {
+              return item !== null && typeof item !== 'undefined' && item !== '';
+            });
           uni.navigateTo({
-            url: `/subPackagesA/detail/result?names=${JSON.stringify(
-              this.totalResStr.split('\n').map((item) => item.split('. ')[1])
-            )}`,
+            url: `/subPackagesA/detail/result?names=${JSON.stringify(names)}`,
           });
         }
       },
